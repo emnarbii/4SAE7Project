@@ -9,6 +9,7 @@ import { ListSuggestionComponent } from './core/list-suggestion/list-suggestion.
 import { FormsModule } from '@angular/forms';
 import { AccueilComponent } from './core/accueil/accueil.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { DetailSuggestionComponent } from './detail-suggestion/detail-suggestion.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ListSuggestionComponent,
     AccueilComponent,
     NotfoundComponent,
+    DetailSuggestionComponent,
 
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],

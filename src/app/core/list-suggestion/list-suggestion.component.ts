@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Suggestion } from '../../models/suggestion';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-suggestion',
@@ -14,6 +15,7 @@ export class ListSuggestionComponent {
   searchItem = '';
   favoriteList: Suggestion[] = [];
   filtredList: Suggestion[] = [];
+    constructor(private act: ActivatedRoute) {}
 
   suggestionList: Suggestion[] = [
     {
@@ -68,6 +70,10 @@ export class ListSuggestionComponent {
     },
   ];
 
+
+  ngOnInit() {
+    console.log(this.act);
+  }
   clickMe() {
     return alert('vous avez cliqué!!!!');
   }

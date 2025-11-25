@@ -1,0 +1,23 @@
+.container-flex {
+  display: flex;        /* Met les div sur la même ligne */
+  flex-direction: row;
+  gap: 20px;            /* espace entre les deux */
+  width: 100%;
+}
+
+/* Colonne gauche */
+.left-panel {
+  flex: 2;              /* occupe plus d’espace */
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* Colonne droite */
+.right-panel {
+  flex: 1;              /* occupe moins d’espace */
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}

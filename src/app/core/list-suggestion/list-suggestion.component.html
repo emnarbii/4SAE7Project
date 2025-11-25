@@ -1,46 +1,55 @@
-<div style=" width:600px">
-  <h1>Liste de Suggestions</h1>
+<div class="container">
+  <div class="col-8">
+    <h1>Liste de Suggestions</h1>
 
-  <input type="text" [(ngModel)]="searchItem" />
-  <div class="card" *ngFor="let s of filter()">
-    <div class="card-header">
-      {{ s.title }}
+    <input type="text" [(ngModel)]="searchItem" />
+    <div class="card" *ngFor="let s of filter()">
+      <div class="card-header">
+        {{ s.title }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ s.category | uppercase }} -- {{ s.date | date }}
+        </h5>
+        <p class="card-text">{{ s.description }}</p>
+        <h3 *ngIf="s.status == 'acceptee'" style="color: green">
+          {{ s.status }}
+        </h3>
+        <h3 *ngIf="s.status == 'refusee'" style="color: red">{{ s.status }}</h3>
+        <h3 *ngIf="s.status == 'en_attente'" style="color: orange">
+          {{ s.status }}
+        </h3>
+
+        <button *ngIf="s.status == 'acceptee'" (click)="like(s)">
+          Like {{ s.nbLikes }}
+        </button>
+        <button
+          [hidden]="s.status == 'refusee' || s.status == 'en_attente'"
+          (click)="addToFavorite(s)"
+        >
+          Add to favorite
+        </button>
+
+        <!-- solution 1 -->
+        <!-- <a routerLink="/suggestion/{{s.id}}">more details</a> -->
+
+        <a [routerLink]="['/suggestion', s.id]">more details</a>
+      </div>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">
-        {{ s.category | uppercase }} -- {{ s.date | date }}
-      </h5>
-      <p class="card-text">{{ s.description }}</p>
-      <h3 *ngIf="s.status == 'acceptee'" style="color: green">
-        {{ s.status }}
-      </h3>
-      <h3 *ngIf="s.status == 'refusee'" style="color: red">{{ s.status }}</h3>
-      <h3 *ngIf="s.status == 'en_attente'" style="color: orange">
-        {{ s.status }}
-      </h3>
 
-      <button *ngIf="s.status == 'acceptee'" (click)="like(s)">
-        Like {{ s.nbLikes }}
-      </button>
-      <button
-        [hidden]="s.status == 'refusee' || s.status == 'en_attente'"
-        (click)="addToFavorite(s)"
-      >
-        Add to favorite
-      </button>
+    <h1>Favorites List</h1>
+
+    <div>
+      <ul>
+        <li *ngFor="let f of favoriteList">
+          {{ f.title }} --- {{ f.date | date }}
+        </li>
+      </ul>
     </div>
   </div>
 
-  <h1>Favorites List</h1>
- 
-</div>
-<div style="width:300px">
-
-   <div>
-    <ul>
-      <li *ngFor="let f of favoriteList">
-        {{ f.title }} --- {{ f.date | date }}
-      </li>
-    </ul>
+  <div class="col-4">
+    <h4>Détails d'une suggestion</h4>
+    <!-- <router-outlet></router-outlet> -->
   </div>
 </div>
