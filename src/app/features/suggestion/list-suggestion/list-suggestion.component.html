@@ -3,14 +3,13 @@
     <h1>Liste de Suggestions</h1>
 
     <input type="text" [(ngModel)]="searchItem" />
+    <a routerLink="./add">Add new Suggestion</a>
     <div class="card" *ngFor="let s of filter()">
       <div class="card-header">
         {{ s.title }}
       </div>
       <div class="card-body">
-        <h5 class="card-title">
-          {{ s.category | uppercase }} -- {{ s.date | date }}
-        </h5>
+        <h5 class="card-title">{{ s.category }} -- {{ s.date }}</h5>
         <p class="card-text">{{ s.description }}</p>
         <h3 *ngIf="s.status == 'acceptee'" style="color: green">
           {{ s.status }}
@@ -33,7 +32,7 @@
         <!-- solution 1 -->
         <!-- <a routerLink="/suggestion/{{s.id}}">more details</a> -->
 
-        <a [routerLink]="['/suggestion', s.id]">more details</a>
+        <a [routerLink]="['', s.id]">more details</a>
       </div>
     </div>
 

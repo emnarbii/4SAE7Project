@@ -1,0 +1,28 @@
+<form [formGroup]="suggForm">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input type="text" class="form-control" formControlName="title" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input type="text" class="form-control" formControlName="description" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    <select class="form-select">
+      <option>-----make choice----</option>
+      <option>administration</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="disabledTextInput" class="form-label">Date</label>
+    <input
+      type="text"
+      id="disabledTextInput"
+      class="form-control"
+      formControlName="date"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="afficher()">Submit</button>
+</form>
