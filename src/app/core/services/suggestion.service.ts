@@ -21,4 +21,12 @@ export class SuggestionService {
   addSuggestion(newSugg:Suggestion):Observable<Suggestion>{
     return this.http.post<Suggestion>(this.suggestionURL,newSugg);
   }
+//get suggestion by id
+getById(id:number){
+    return this.http.get<{success:boolean, suggestion:Suggestion}>(this.suggestionURL+'/'+id)
+  }
+  // update suggestion
+  update(id:number, sugg:Suggestion){
+    return this.http.put<Suggestion>(this.suggestionURL+'/'+id,sugg)
+  }
 }

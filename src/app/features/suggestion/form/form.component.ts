@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SuggestionService } from '../../../core/services/suggestion.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class FormComponent {
   suggForm!: FormGroup;
+  id!: number;
   categories: string[] = [
     'Infrastructure et bâtiments',
     'Technologie et services numériques',
@@ -22,7 +23,11 @@ export class FormComponent {
     'Accessibilité',
     'Autre',
   ];
-  constructor(private dataService: SuggestionService, private route: Router) {
+  constructor(
+    private dataService: SuggestionService,
+    private route: Router,
+    private act: ActivatedRoute
+  ) {
     this.suggForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,
@@ -40,12 +45,29 @@ export class FormComponent {
     });
   }
 
+  ngOnInit() {
+    // step 1:get Id from URL if exist
+    this.act.paramMap.subscribe((param) => (this.id = Number(param.get('id'))));
+    //step2: get sugg by id
+    // fill the form
+    this.dataService
+      .getById(this.id)
+      .subscribe((item) => {
+        console.log(item)
+        this.suggForm.patchValue(item.suggestion)});
+  }
   get title() {
     return this.suggForm.get('title');
   }
   submit() {
-    this.dataService
-      .addSuggestion(this.suggForm.value)
-      .subscribe(() => this.route.navigate(['/suggestions']));
+    if (!this.id) {
+      this.dataService
+        .addSuggestion(this.suggForm.value)
+        .subscribe(() => this.route.navigate(['/suggestions']));
+    }else{
+      this.dataService
+        .update(this.id,this.suggForm.value)
+        .subscribe(() => this.route.navigate(['/suggestions']));
+    }
   }
 }

@@ -16,9 +16,8 @@ export class DetailSuggestionComponent {
   ngOnInit() {
     console.log(this.act);
     this.id = Number(this.act.snapshot.paramMap.get('id'));
-    // this.suggDetail = this.data.getSuggestionList().filter(
-    //   (sugg) => sugg.id == this.id
-    // )[0];
+    // this.id = Number(this.act.snapshot.params['id']);
+    this.data.getById(this.id).subscribe(item=>this.suggDetail=item.suggestion)
   }
   // getSuggById() {
   //   this.suggDetail = this.suggestionList.filter(
