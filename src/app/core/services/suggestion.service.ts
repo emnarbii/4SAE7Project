@@ -1,65 +1,24 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Suggestion } from '../../models/suggestion';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SuggestionService {
-suggestionList: Suggestion[] = [
-    {
-      id: 1,
-      title: 'Organiser une journée team building',
-      description:
-        "Suggestion pour organiser une journée de team building pour renforcer les liens entre les membres de l'équipe.",
-      category: 'Événements',
-      date: new Date('2025-01-20'),
-      status: 'acceptee',
-      nbLikes: 20,
-    },
-    {
-      id: 2,
-      title: 'Améliorer le système de réservation',
-      description:
-        'Proposition pour améliorer la gestion des réservations en ligne avec un système de confirmation automatique.',
-      category: 'Technologie',
-      date: new Date('2025-01-15'),
-      status: 'refusee',
-      nbLikes: 0,
-    },
-    {
-      id: 3,
-      title: 'Créer un système de récompenses',
-      description:
-        "Mise en place d'un programme de récompenses pour motiver les employés et reconnaître leurs efforts.",
-      category: 'Ressources Humaines',
-      date: new Date('2025-01-25'),
-      status: 'refusee',
-      nbLikes: 0,
-    },
-    {
-      id: 4,
-      title: "Moderniser l'interface utilisateur",
-      description:
-        "Refonte complète de l'interface utilisateur pour une meilleure expérience utilisateur.",
-      category: 'Technologie',
-      date: new Date('2025-01-30'),
-      status: 'en_attente',
-      nbLikes: 0,
-    },
-    {
-      id: 5,
-      title: 'Formation à la sécurité informatique',
-      description:
-        "Organisation d'une formation sur les bonnes pratiques de sécurité informatique pour tous les employés.",
-      category: 'Formation',
-      date: new Date('2025-02-05'),
-      status: 'acceptee',
-      nbLikes: 100,
-    },
-  ];
-  constructor() { }
+  //inject httpClient service into the constructor
+  constructor(private http: HttpClient) {}
+  // declare the URL endpoint
+  private suggestionURL = 'http://localhost:3000/suggestions';
 
-  getSuggestionList(){
-    return this.suggestionList;
+  //get suggestion List
+  getSuggestionList(): Observable<Suggestion[]> {
+    return this.http.get<Suggestion[]>(this.suggestionURL);
+  }
+
+  // add suggestion
+  addSuggestion(newSugg:Suggestion):Observable<Suggestion>{
+    return this.http.post<Suggestion>(this.suggestionURL,newSugg);
   }
 }

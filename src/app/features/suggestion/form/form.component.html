@@ -5,29 +5,50 @@
   </div>
 
   <div *ngIf="title?.invalid && title?.touched">
-    <span *ngIf="suggForm.controls['title'].errors?.['required']"> this field is required</span>
-      <span *ngIf="suggForm.get('title')?.errors?.['minlength']"> this field must contains at least 5 caracters</span>
-      <span *ngIf="title?.errors?.['pattern']"> this field must respect the pattern</span>
-
+    <span *ngIf="suggForm.controls['title'].errors?.['required']">
+      this field is required</span
+    >
+    <span *ngIf="suggForm.get('title')?.errors?.['minlength']">
+      this field must contains at least 5 caracters</span
+    >
+    <span *ngIf="title?.errors?.['pattern']">
+      this field must respect the pattern</span
+    >
   </div>
   <div class="mb-3">
     <label class="form-label">Description</label>
     <input type="text" class="form-control" formControlName="description" />
   </div>
-  <div *ngIf="suggForm.controls['description']?.invalid && suggForm.controls['description']?.touched">
-    <span *ngIf="suggForm.controls['description'].errors?.['required']"> this field is required</span>
-      <span *ngIf="suggForm.get('description')?.errors?.['minlength']"> this field must contains at least 30 caracters</span>
-
+  <div
+    *ngIf="
+      suggForm.controls['description']?.invalid &&
+      suggForm.controls['description']?.touched
+    "
+  >
+    <span *ngIf="suggForm.controls['description'].errors?.['required']">
+      this field is required</span
+    >
+    <span *ngIf="suggForm.get('description')?.errors?.['minlength']">
+      this field must contains at least 30 caracters</span
+    >
   </div>
   <div class="mb-3">
     <label class="form-label">Category</label>
     <select class="form-select" formControlName="category">
-      <option *ngFor="let cat of categories; let i = index" [value]="i">{{ cat }}</option>
+      <option *ngFor="let cat of categories" [value]="cat">
+        {{ cat }}
+      </option>
     </select>
   </div>
-   <div *ngIf="suggForm.controls['category']?.invalid && suggForm.controls['category']?.touched">
-    <span *ngIf="suggForm.controls['category'].errors?.['required']"> this field is required</span>
-
+  <div
+    *ngIf="
+      suggForm.controls['category']?.invalid &&
+      suggForm.controls['category']?.touched
+    "
+  >
+    <span *ngIf="suggForm.controls['category'].errors?.['required']">
+      this field is required</span
+    >
   </div>
   <div class="mb-3">
     <label class="form-label">Status</label>
@@ -44,7 +65,12 @@
     />
   </div>
 
-  <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="suggForm.invalid">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    (click)="submit()"
+    [disabled]="suggForm.invalid"
+  >
     Submit
   </button>
 </form>

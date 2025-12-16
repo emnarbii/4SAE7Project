@@ -15,11 +15,13 @@ export class ListSuggestionComponent {
   altImg = 'suggestion image';
   searchItem = '';
   favoriteList: Suggestion[] = [];
-  filtredList: Suggestion[] = [];
-    constructor(private suggService: SuggestionService, private act: ActivatedRoute) {}
+  listfromback: Suggestion[] = [];
+    constructor( private act: ActivatedRoute, private dataService:SuggestionService) {}
 
   ngOnInit() {
     console.log(this.act);
+     this.dataService.getSuggestionList().subscribe(items=>this.listfromback=items);
+    
   }
   clickMe() {
     return alert('vous avez cliqué!!!!');
@@ -36,12 +38,12 @@ export class ListSuggestionComponent {
     return null;
   }
 
-  filter() {
-    this.filtredList = this.suggService.getSuggestionList().filter(
-      (sugg) =>
-        sugg.title.toLowerCase().includes(this.searchItem.toLowerCase()) ||
-        sugg.category.toLowerCase().includes(this.searchItem.toLowerCase())
-    );
-    return this.filtredList;
-  }
+  // filter() {
+  //   this.filtredList = this.suggService.getSuggestionList().filter(
+  //     (sugg) =>
+  //       sugg.title.toLowerCase().includes(this.searchItem.toLowerCase()) ||
+  //       sugg.category.toLowerCase().includes(this.searchItem.toLowerCase())
+  //   );
+  //   return this.filtredList;
+  // }
 }

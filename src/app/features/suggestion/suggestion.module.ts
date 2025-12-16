@@ -7,6 +7,7 @@ import { DetailSuggestionComponent } from './detail-suggestion/detail-suggestion
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListSuggestionComponent } from './list-suggestion/list-suggestion.component';
 import { FormComponent } from './form/form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [

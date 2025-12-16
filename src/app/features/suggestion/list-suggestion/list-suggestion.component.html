@@ -4,7 +4,7 @@
 
     <input type="text" [(ngModel)]="searchItem" />
     <a routerLink="./add">Add new Suggestion</a>
-    <div class="card" *ngFor="let s of filter()">
+    <div class="card" *ngFor="let s of listfromback">
       <div class="card-header">
         {{ s.title }}
       </div>

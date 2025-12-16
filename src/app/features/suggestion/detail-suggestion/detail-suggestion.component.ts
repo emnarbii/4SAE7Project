@@ -9,16 +9,16 @@ import { SuggestionService } from '../../../core/services/suggestion.service';
   styleUrl: './detail-suggestion.component.css',
 })
 export class DetailSuggestionComponent {
-  constructor(private act: ActivatedRoute,private suggService:SuggestionService) {}
+  constructor(private act: ActivatedRoute,private data:SuggestionService) {}
   id!: number;
   suggDetail!: Suggestion;
 
   ngOnInit() {
     console.log(this.act);
     this.id = Number(this.act.snapshot.paramMap.get('id'));
-    this.suggDetail = this.suggService.getSuggestionList().filter(
-      (sugg) => sugg.id == this.id
-    )[0];
+    // this.suggDetail = this.data.getSuggestionList().filter(
+    //   (sugg) => sugg.id == this.id
+    // )[0];
   }
   // getSuggById() {
   //   this.suggDetail = this.suggestionList.filter(
